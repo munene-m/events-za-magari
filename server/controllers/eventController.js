@@ -12,10 +12,10 @@ const createEvent = asyncHandler(async (req, res) => {
 
     // const eventExists = await Event.findOne({ Event: {$all: [eventTitle, eventDate, eventHost]} })
 
-    if (eventExists) {
-        res.status(400)
-        throw new Error("Event already exists!")
-    }
+    // if (eventExists) {
+    //     res.status(400)
+    //     throw new Error("Event already exists!")
+    // }
 
     const event = await Event.create({
         eventTitle,
@@ -41,7 +41,7 @@ const createEvent = asyncHandler(async (req, res) => {
 })
 
 const getAllEvents = asyncHandler(async (req, res) => {
-    const events = await Event.find().sort({ "createdAt": -1 })
+    const events = await Event.find().sort({ $natural: -1 })
     res.status(200).json(events)
 })
 
